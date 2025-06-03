@@ -11,15 +11,19 @@ init:
 # what combinations to test
 environment:
   matrix:
-    - nodejs_version: 0.10
-    - nodejs_version: 0.12
+    - nodejs_version: 0.10.48
+      full_install: "true"
+    - nodejs_version: 0.12.18
+      full_install: "true"
     - nodejs_version: 4
     - nodejs_version: 6
-    - nodejs_version: 7
+    - nodejs_version: 7.10.1
+      full_install: "true"
 
 # get the latest stable version of Node 0.STABLE.latest
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - ps: if($env:full_install -eq "true") {Update-NodeJsInstallation $env:nodejs_version x86}
+  - ps: if($env:full_install -eq $null) {Install-Product node $env:nodejs_version}
   - npm install
 
 build: off

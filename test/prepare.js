@@ -22,7 +22,7 @@ glob.sync('prepare_*', { cwd: __dirname + '/fixtures' }).forEach(function (file)
 // Install spawn-sync for older node versions
 if (/^v0\.10\./.test(process.version)) {
     process.stdout.write('Installing spawn-sync..\n');
-    buffered('spawn', 'npm', ['install', 'spawn-sync'], { stdio: 'inherit' }, function (err) {
+    buffered('spawn', 'npm', ['install', 'spawn-sync@1.0.15'], { stdio: 'inherit' }, function (err) {
         if (err) {
             throw err;
         }
